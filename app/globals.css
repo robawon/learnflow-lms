@@ -1,0 +1,31 @@
+/* Tailwind base, component and utility layers. */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Base look: white page, soft dark-slate text. */
+@layer base {
+  body { @apply bg-white text-slate-800 antialiased; }
+  h1, h2, h3 { @apply text-slate-900; }
+}
+
+/* Reusable component classes used across the whole platform. */
+@layer components {
+  /* Primary button: solid water blue. */
+  .btn { @apply inline-flex items-center justify-center rounded-lg bg-water-600 px-4 py-2 text-sm font-medium text-white shadow-sm transition hover:bg-water-700 focus:outline-none focus:ring-2 focus:ring-water-300; }
+
+  /* Secondary button: white with a water-blue outline. */
+  .btn-ghost { @apply inline-flex items-center justify-center rounded-lg border border-water-200 bg-white px-4 py-2 text-sm font-medium text-water-700 transition hover:bg-water-50 focus:outline-none focus:ring-2 focus:ring-water-200; }
+
+  /* Destructive text button (delete, remove). */
+  .btn-danger { @apply text-sm font-medium text-red-600 hover:text-red-700 hover:underline; }
+
+  /* Text inputs, selects and textareas. */
+  .input { @apply w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-800 placeholder-slate-400 focus:border-water-400 focus:outline-none focus:ring-2 focus:ring-water-200; }
+
+  /* White card with a faint water-blue border. */
+  .card { @apply rounded-xl border border-water-100 bg-white p-5 shadow-sm; }
+
+  /* Small rounded label used for statuses. */
+  .badge { @apply inline-block rounded-full px-2.5 py-0.5 text-xs font-medium; }
+}
