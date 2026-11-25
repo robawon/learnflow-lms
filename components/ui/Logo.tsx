@@ -1,14 +1,50 @@
 import Link from "next/link";
 
-// The LearnFlow logo: a small water drop next to the platform name. Links to the home page.
-export default function Logo({ href = "/" }: { href?: string }) {
+// LearnFlow modern brand logo:
+// Represents continuous learning and fluid growth through a dual intertwined loop
+export default function Logo({ href = "/", compact = false }: { href?: string; compact?: boolean }) {
   return (
-    <Link href={href} className="flex items-center gap-2 font-semibold text-water-800">
-      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-        <path d="M12 2.5c3.6 4.4 6.5 7.7 6.5 11.2a6.5 6.5 0 1 1-13 0C5.5 10.2 8.4 6.9 12 2.5Z" fill="#1ea3d4" />
-        <path d="M9 14.2a3.2 3.2 0 0 0 2.6 3.1" stroke="#fff" strokeWidth="1.6" strokeLinecap="round" />
-      </svg>
-      <span className="text-lg">LearnFlow</span>
+    <Link
+      href={href}
+      className="group inline-flex items-center gap-2.5 transition focus:outline-none"
+    >
+      <div className="relative flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-primary to-accent p-0.5 shadow-sm transition-transform duration-200 group-hover:scale-105">
+        <div className="flex h-full w-full items-center justify-center rounded-[10px] bg-surface">
+          <svg
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            aria-hidden="true"
+            className="text-primary transition-colors group-hover:text-accent"
+          >
+            <path
+              d="M12 3L2 8.5L12 14L22 8.5L12 3Z"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+            <path
+              d="M6 10.7V17C6 18.5 8.7 20 12 20C15.3 20 18 18.5 18 17V10.7"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+            />
+            <path
+              d="M22 8.5V14"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+            />
+          </svg>
+        </div>
+      </div>
+      {!compact && (
+        <span className="font-serif text-xl font-bold tracking-tight text-main">
+          Learn<span className="text-primary">Flow</span>
+        </span>
+      )}
     </Link>
   );
 }

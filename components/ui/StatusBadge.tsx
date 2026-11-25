@@ -1,22 +1,37 @@
-// Colours for each known status word.
-const COLOURS: Record<string, string> = {
-  pending: "bg-amber-100 text-amber-800",
-  submitted: "bg-water-100 text-water-800",
-  graded: "bg-emerald-100 text-emerald-800",
-  overdue: "bg-red-100 text-red-700",
-  draft: "bg-slate-100 text-slate-700",
-  published: "bg-emerald-100 text-emerald-800",
-  archived: "bg-slate-200 text-slate-600",
-  active: "bg-emerald-100 text-emerald-800",
-  suspended: "bg-red-100 text-red-700",
-  planned: "bg-water-100 text-water-800",
-  completed: "bg-emerald-100 text-emerald-800",
-  partial: "bg-amber-100 text-amber-800",
-  missed: "bg-red-100 text-red-700",
-  rescheduled: "bg-slate-100 text-slate-600",
+// StatusBadge: Modern pill badge with traffic light status styling and crisp contrast
+const BADGE_STYLES: Record<string, string> = {
+  // Urgency / traffic lights
+  pending: "bg-warning-subtle text-warning border border-warning/30",
+  submitted: "bg-primary-subtle text-primary border border-primary/30",
+  graded: "bg-success-subtle text-success border border-success/30",
+  overdue: "bg-danger-subtle text-danger border border-danger/30 font-bold",
+  draft: "bg-surface-2 text-muted border border-border",
+  published: "bg-success-subtle text-success border border-success/30",
+  archived: "bg-surface-2 text-muted border border-border",
+  active: "bg-success-subtle text-success border border-success/30",
+  suspended: "bg-danger-subtle text-danger border border-danger/30",
+  planned: "bg-primary-subtle text-primary border border-primary/30",
+  completed: "bg-success-subtle text-success border border-success/30",
+  partial: "bg-warning-subtle text-warning border border-warning/30",
+  missed: "bg-danger-subtle text-danger border border-danger/30 font-bold animate-pulse",
+  rescheduled: "bg-surface-2 text-accent border border-accent/30",
 };
 
-// A small rounded label that shows a status (for example "published" or "overdue").
-export default function StatusBadge({ status }: { status: string }) {
-  return <span className={`badge ${COLOURS[status] ?? "bg-slate-100 text-slate-700"}`}>{status}</span>;
+export default function StatusBadge({
+  status,
+  size = "md",
+}: {
+  status: string;
+  size?: "sm" | "md";
+}) {
+  const normalized = status.toLowerCase();
+  const styling = BADGE_STYLES[normalized] ?? "bg-surface-2 text-main border border-border";
+  const sizeClass = size === "sm" ? "px-2 py-0.5 text-[10px]" : "px-3 py-1 text-xs";
+
+  return (
+    <span className={`inline-flex items-center gap-1.5 rounded-full font-semibold uppercase tracking-wider ${sizeClass} ${styling}`}>
+      <span className="h-1.5 w-1.5 rounded-full bg-current opacity-80" />
+      {status}
+    </span>
+  );
 }

@@ -1,34 +1,57 @@
 "use client";
+
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-// A navigation link that highlights itself when its page is open.
-// "exact" links (like a dashboard) only highlight on the exact path;
-// others also highlight on sub-pages. "compact" gives the small horizontal style used on phones.
+// NavLink: Navigation link with active indicator and smooth hover feedback.
 export default function NavLink({
   href,
   label,
   exact = false,
   compact = false,
+  icon,
 }: {
   href: string;
   label: string;
   exact?: boolean;
   compact?: boolean;
+  icon?: React.ReactNode;
 }) {
   const pathname = usePathname();
-  const active = exact ? pathname === href : pathname === href || pathname.startsWith(href + "/");
+  const active = exact
+    ? pathname === href
+    : pathname === href || pathname.startsWith(href + "/");
 
-  const base = compact
-    ? "whitespace-nowrap rounded-full px-3 py-1.5 text-sm"
-    : "block rounded-lg px-3 py-2 text-sm font-medium";
-  const state = active
-    ? "bg-water-100 text-water-800"
-    : "text-slate-600 hover:bg-water-50 hover:text-water-700";
+  if (compact) {
+    return (
+      <Link
+        href={href}
+        className={`whitespace-nowrap rounded-full px-3.5 py-1.5 text-xs font-semibold transition-all duration-200 ${
+          active
+            ? "bg-primary text-white shadow-sm"
+            : "border border-border bg-surface text-muted hover:border-primary/40 hover:text-main"
+        }`}
+      >
+        {label}
+      </Link>
+    );
+  }
 
   return (
-    <Link href={href} className={`${base} ${state}`}>
-      {label}
+    <Link
+      href={href}
+      className={`group relative flex items-center gap-3 rounded-xl px-3.5 py-2.5 text-sm font-medium transition-all duration-200 ${
+        active
+          ? "bg-primary/10 text-primary font-semibold shadow-sm"
+          : "text-muted hover:bg-surface-2 hover:text-main"
+      }`}
+    >
+      {/* Animated active bar on the left edge */}
+      {active && (
+        <span className="absolute left-0 top-2 bottom-2 w-1 rounded-r-full bg-primary" />
+      )}
+      {icon && <span className="shrink-0">{icon}</span>}
+      <span className="truncate">{label}</span>
     </Link>
   );
 }

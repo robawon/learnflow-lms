@@ -1,31 +1,129 @@
-/* Tailwind base, component and utility layers. */
+/* Tailwind base, component and utility layers */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Base look: white page, soft dark-slate text. */
-@layer base {
-  body { @apply bg-white text-slate-800 antialiased; }
-  h1, h2, h3 { @apply text-slate-900; }
+/* Color variables for light (cream/blue/brown) and dark (espresso/blue/warm-accent) themes */
+:root {
+  --color-bg: #f7f3ee;
+  --color-surface: #ffffff;
+  --color-surface-2: #f1ebe3;
+  --color-text: #1f1a17;
+  --color-muted: #6b5f55;
+  --color-primary: #0a66c2;
+  --color-primary-hover: #084e96;
+  --color-primary-subtle: #e6f0fa;
+  --color-accent: #7a5233;
+  --color-accent-hover: #633f26;
+  --color-accent-subtle: #f5ece4;
+  --color-border: #e7dccf;
+  --color-border-subtle: #f0e6dc;
+  --color-success: #16a34a;
+  --color-success-subtle: #dcfce7;
+  --color-warning: #f59e0b;
+  --color-warning-subtle: #fef3c7;
+  --color-danger: #dc2626;
+  --color-danger-subtle: #fee2e2;
 }
 
-/* Reusable component classes used across the whole platform. */
+.dark {
+  --color-bg: #17120e;
+  --color-surface: #231c16;
+  --color-surface-2: #2d241c;
+  --color-text: #f3ebe3;
+  --color-muted: #b7a898;
+  --color-primary: #4da3ff;
+  --color-primary-hover: #75b8ff;
+  --color-primary-subtle: #172a3e;
+  --color-accent: #c89b6d;
+  --color-accent-hover: #dab58f;
+  --color-accent-subtle: #382c22;
+  --color-border: #3a2e24;
+  --color-border-subtle: #2d241c;
+  --color-success: #22c55e;
+  --color-success-subtle: #143820;
+  --color-warning: #fbbf24;
+  --color-warning-subtle: #3a2a10;
+  --color-danger: #ef4444;
+  --color-danger-subtle: #3d1414;
+}
+
+/* Base styles: fonts, background color and typography smoothing */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    color-scheme: light;
+  }
+  html.dark {
+    color-scheme: dark;
+  }
+  body {
+    @apply bg-bg text-main antialiased font-sans transition-colors duration-200 selection:bg-primary/20 selection:text-primary;
+    background-color: var(--color-bg);
+    color: var(--color-text);
+  }
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-serif text-main tracking-tight;
+  }
+}
+
+/* Reusable modern component utilities */
 @layer components {
-  /* Primary button: solid water blue. */
-  .btn { @apply inline-flex items-center justify-center rounded-lg bg-water-600 px-4 py-2 text-sm font-medium text-white shadow-sm transition hover:bg-water-700 focus:outline-none focus:ring-2 focus:ring-water-300; }
+  /* Solid primary pill/button */
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition-all duration-200 hover:bg-primary-hover hover:shadow-md active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-primary/40 disabled:opacity-50 disabled:pointer-events-none;
+  }
 
-  /* Secondary button: white with a water-blue outline. */
-  .btn-ghost { @apply inline-flex items-center justify-center rounded-lg border border-water-200 bg-white px-4 py-2 text-sm font-medium text-water-700 transition hover:bg-water-50 focus:outline-none focus:ring-2 focus:ring-water-200; }
+  /* Outlined pill button */
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 rounded-full border border-border bg-surface px-5 py-2.5 text-sm font-semibold text-main transition-all duration-200 hover:border-primary/40 hover:bg-surface-2 hover:text-primary active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-primary/30 disabled:opacity-50 disabled:pointer-events-none;
+  }
 
-  /* Destructive text button (delete, remove). */
-  .btn-danger { @apply text-sm font-medium text-red-600 hover:text-red-700 hover:underline; }
+  /* Warm accent button */
+  .btn-accent {
+    @apply inline-flex items-center justify-center gap-2 rounded-full bg-accent px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition-all duration-200 hover:bg-accent-hover hover:shadow-md active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-accent/40;
+  }
 
-  /* Text inputs, selects and textareas. */
-  .input { @apply w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-800 placeholder-slate-400 focus:border-water-400 focus:outline-none focus:ring-2 focus:ring-water-200; }
+  /* Destructive text action button */
+  .btn-danger {
+    @apply inline-flex items-center justify-center text-sm font-medium text-danger hover:underline focus:outline-none;
+  }
 
-  /* White card with a faint water-blue border. */
-  .card { @apply rounded-xl border border-water-100 bg-white p-5 shadow-sm; }
+  /* Polished text inputs, selects and textareas */
+  .input {
+    @apply w-full rounded-xl border border-border bg-surface px-4 py-2.5 text-sm text-main placeholder-muted/60 transition-all duration-150 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 hover:border-border/80;
+  }
 
-  /* Small rounded label used for statuses. */
-  .badge { @apply inline-block rounded-full px-2.5 py-0.5 text-xs font-medium; }
+  /* Responsive card with smooth surface tone and border */
+  .card {
+    @apply rounded-2xl border border-border bg-surface p-6 shadow-sm transition-all duration-200 hover:shadow-card;
+  }
+
+  /* Status badge with traffic light & category support */
+  .badge {
+    @apply inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-semibold uppercase tracking-wider;
+  }
+}
+
+/* Custom subtle pattern overlay for rich depth */
+.mesh-gradient-hero {
+  background-image: 
+    radial-gradient(circle at 10% 20%, rgba(10, 102, 194, 0.08) 0%, transparent 40%),
+    radial-gradient(circle at 90% 80%, rgba(122, 82, 51, 0.08) 0%, transparent 40%);
+}
+
+.dark .mesh-gradient-hero {
+  background-image: 
+    radial-gradient(circle at 10% 20%, rgba(77, 163, 255, 0.08) 0%, transparent 40%),
+    radial-gradient(circle at 90% 80%, rgba(200, 155, 109, 0.08) 0%, transparent 40%);
+}
+
+/* Reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
