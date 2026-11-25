@@ -1,7 +1,7 @@
 import type { Config } from "tailwindcss";
 
 // Tailwind configuration for LearnFlow LMS.
-// Uses semantic tokens driven by CSS variables with support for class-based dark mode.
+// Uses semantic tokens driven by space-separated RGB CSS variables to support Tailwind 3 opacity modifiers (/20, /40).
 const config: Config = {
   darkMode: "class",
   content: [
@@ -13,42 +13,42 @@ const config: Config = {
     extend: {
       colors: {
         // Base backgrounds & surfaces
-        bg: "var(--color-bg)",
-        surface: "var(--color-surface)",
-        "surface-2": "var(--color-surface-2)",
+        bg: "rgb(var(--color-bg) / <alpha-value>)",
+        surface: "rgb(var(--color-surface) / <alpha-value>)",
+        "surface-2": "rgb(var(--color-surface-2) / <alpha-value>)",
         
         // Typography
-        main: "var(--color-text)",
-        muted: "var(--color-muted)",
+        main: "rgb(var(--color-text) / <alpha-value>)",
+        muted: "rgb(var(--color-muted) / <alpha-value>)",
         
         // Brand & Accents
         primary: {
-          DEFAULT: "var(--color-primary)",
-          hover: "var(--color-primary-hover)",
-          subtle: "var(--color-primary-subtle)",
+          DEFAULT: "rgb(var(--color-primary) / <alpha-value>)",
+          hover: "rgb(var(--color-primary-hover) / <alpha-value>)",
+          subtle: "rgb(var(--color-primary-subtle) / <alpha-value>)",
         },
         accent: {
-          DEFAULT: "var(--color-accent)",
-          hover: "var(--color-accent-hover)",
-          subtle: "var(--color-accent-subtle)",
+          DEFAULT: "rgb(var(--color-accent) / <alpha-value>)",
+          hover: "rgb(var(--color-accent-hover) / <alpha-value>)",
+          subtle: "rgb(var(--color-accent-subtle) / <alpha-value>)",
         },
         
         // Borders & Dividers
-        border: "var(--color-border)",
-        "border-subtle": "var(--color-border-subtle)",
+        border: "rgb(var(--color-border) / <alpha-value>)",
+        "border-subtle": "rgb(var(--color-border-subtle) / <alpha-value>)",
         
         // Traffic light status & urgency indicators
         success: {
-          DEFAULT: "var(--color-success)",
-          subtle: "var(--color-success-subtle)",
+          DEFAULT: "rgb(var(--color-success) / <alpha-value>)",
+          subtle: "rgb(var(--color-success-subtle) / <alpha-value>)",
         },
         warning: {
-          DEFAULT: "var(--color-warning)",
-          subtle: "var(--color-warning-subtle)",
+          DEFAULT: "rgb(var(--color-warning) / <alpha-value>)",
+          subtle: "rgb(var(--color-warning-subtle) / <alpha-value>)",
         },
         danger: {
-          DEFAULT: "var(--color-danger)",
-          subtle: "var(--color-danger-subtle)",
+          DEFAULT: "rgb(var(--color-danger) / <alpha-value>)",
+          subtle: "rgb(var(--color-danger-subtle) / <alpha-value>)",
         },
       },
       fontFamily: {
