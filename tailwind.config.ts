@@ -16,11 +16,11 @@ const config: Config = {
         bg: "rgb(var(--color-bg) / <alpha-value>)",
         surface: "rgb(var(--color-surface) / <alpha-value>)",
         "surface-2": "rgb(var(--color-surface-2) / <alpha-value>)",
-        
+
         // Typography
         main: "rgb(var(--color-text) / <alpha-value>)",
         muted: "rgb(var(--color-muted) / <alpha-value>)",
-        
+
         // Brand & Accents
         primary: {
           DEFAULT: "rgb(var(--color-primary) / <alpha-value>)",
@@ -32,11 +32,11 @@ const config: Config = {
           hover: "rgb(var(--color-accent-hover) / <alpha-value>)",
           subtle: "rgb(var(--color-accent-subtle) / <alpha-value>)",
         },
-        
+
         // Borders & Dividers
         border: "rgb(var(--color-border) / <alpha-value>)",
         "border-subtle": "rgb(var(--color-border-subtle) / <alpha-value>)",
-        
+
         // Traffic light status & urgency indicators
         success: {
           DEFAULT: "rgb(var(--color-success) / <alpha-value>)",
